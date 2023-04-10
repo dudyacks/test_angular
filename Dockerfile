@@ -20,4 +20,4 @@ RUN npm run build --prod
 EXPOSE 80
 
 # Inicia el servidor web para servir la aplicación de Angular
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "start"]

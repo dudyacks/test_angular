@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.http.get("localhost:8085/api/demo/hola").subscribe({
+    this.http.get("https://test-gateway-dudyacks94-dev.apps.sandbox-m3.1530.p1.openshiftapps.com/api/demo/hola").subscribe({
       next: value => {
         console.log(value);
       },

@@ -1,25 +1,17 @@
-# Establece la imagen base
-FROM node:14.16-alpine
+# Imagen base de Node.js
+FROM node:latest as node
 
-# Establece el directorio de trabajo
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-RUN ["chmod", "+x", "/app"]
-
-# Copia el archivo package.json y package-lock.json
-COPY package*.json ./
-
-# Instala las dependencias del proyecto
-RUN npm install
-
-# Copia todos los archivos de la aplicación
+# Copiar los archivos de la aplicación en el contenedor
 COPY . .
 
-# Construye la aplicación de Angular en modo producción
-RUN npm run build --prod
+# Instalar las dependencias y construir la aplicación
+RUN npm install && ng build --prod
 
-# Expone el puerto 80 para que pueda ser accesible desde el exterior
-EXPOSE 80
+# Imagen base de Nginx
+FROM nginx:latest
 
-# Inicia el servidor web para servir la aplicación de Angular
-CMD ["npm", "run", "start"]
+# Copiar los archivos construidos en el contenedor de Nginx
+COPY --from=node /app/dist/demo /usr/share/nginx/html

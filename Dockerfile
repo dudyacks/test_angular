@@ -1,17 +1,10 @@
-# Imagen base de Node.js
+#stage 1
 FROM node:latest as node
-
-# Establecer el directorio de trabajo
 WORKDIR /app
-
-# Copiar los archivos de la aplicación en el contenedor
 COPY . .
-
-# Instalar las dependencias y construir la aplicación
-RUN npm install && npm run build --prod
-
-# Imagen base de Nginx
-FROM nginxinc/nginx-unprivileged
-
-# Copiar los archivos construidos en el contenedor de Nginx
+RUN npm install
+RUN npm run build --prod
+#stage 2
+FROM nginx:alpine
 COPY --from=node /app/dist/demo /usr/share/nginx/html
+EXPOSE 80

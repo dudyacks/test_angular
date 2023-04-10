@@ -11,7 +11,7 @@ COPY . .
 RUN npm install && npm run build --prod
 
 # Imagen base de Nginx
-FROM nginx:latest
+FROM nginxinc/nginx-unprivileged
 
 # Copiar los archivos construidos en el contenedor de Nginx
 COPY --from=node /app/dist/demo /usr/share/nginx/html

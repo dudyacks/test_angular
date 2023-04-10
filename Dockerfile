@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Instalar las dependencias y construir la aplicación
-RUN npm install && ng build --prod
+RUN npm install && npm run build --prod
 
 # Imagen base de Nginx
 FROM nginx:latest

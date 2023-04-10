@@ -4,6 +4,8 @@ FROM node:14.16-alpine
 # Establece el directorio de trabajo
 WORKDIR /app
 
+RUN ["chmod", "+x", "/app"]
+
 # Copia el archivo package.json y package-lock.json
 COPY package*.json ./
 
